@@ -8,5 +8,6 @@ struct node{
 
 void push(struct node **, int);
 void print_list(struct node *);
+int  GetNth(struct node *, int);
 
 #endif

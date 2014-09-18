@@ -27,6 +27,25 @@ void print_list(struct node *head_ref)
     printf("NULL\n");
 }
 
+int GetNth(struct node *head, int index)
+{
+    struct node *current = head;
+    int count = 0;
+
+    if (!head)
+        return -1;
+
+    while(current){
+        if (count == index){
+            break;
+        }
+        count++;
+        current = current->next;
+    }
+    return current->key;
+}
+
+
 int main(int argc, char **argv)
 {
     struct node *head_ref =NULL;
@@ -36,7 +55,7 @@ int main(int argc, char **argv)
     push(&head_ref, 3);
     push(&head_ref, 4);
     print_list(head_ref);
-
+    printf("%dth is %d\n", 3, GetNth(head_ref, 3));
     exit(0);
 }
 
