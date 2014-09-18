@@ -16,13 +16,15 @@ void push(struct node **head_ref, int new_data)
     *head_ref = new_node;
 }
 
-void print_list(struct node **head_ref)
+void print_list(struct node *head_ref)
 {
-    while(*head_ref){
-        printf("%d->",*head_ref->key);
-        (*head_ref)++;
+    if (!head_ref)
+        return;
+    while(head_ref){
+        printf("%d->",head_ref->key);
+        head_ref = head_ref->next;
     }
-    pirntf("->NULL\n");
+    printf("NULL\n");
 }
 
 int main(int argc, char **argv)
@@ -30,7 +32,10 @@ int main(int argc, char **argv)
     struct node *head_ref =NULL;
 
     push(&head_ref, 1);
-    print_list(&head_ref);
+    push(&head_ref, 2);
+    push(&head_ref, 3);
+    push(&head_ref, 4);
+    print_list(head_ref);
 
     exit(0);
 }
