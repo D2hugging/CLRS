@@ -6,5 +6,7 @@ struct node{
     struct node *next;
 };
 
+void push(struct node **, int);
+void print_list(struct node **);
 
 #endif
