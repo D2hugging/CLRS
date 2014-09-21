@@ -16,13 +16,12 @@ void push(struct node **head_ref, int new_data)
     *head_ref = new_node;
 }
 
-void print_list(struct node *head_ref)
+void printList(struct node *head)
 {
-    if (!head_ref)
-        return;
-    while(head_ref){
-        printf("%d->",head_ref->key);
-        head_ref = head_ref->next;
+    struct node *current = head;
+    while(current){
+        printf("%d->",current->key);
+        current = current->next;
     }
     printf("NULL\n");
 }
@@ -45,6 +44,29 @@ int GetNth(struct node *head, int index)
     return current->key;
 }
 
+struct node *returnNth(struct node *head, int index)
+{
+    if (!head)
+        return NULL;
+    int count = 0;
+    struct node *current = head;
+    while(current){
+        if (count == index){
+            return current;
+        }
+        count++;
+        current = current->next;
+    }
+    exit(0);
+}
+
+void deleteNode(struct node *node_ptr)
+{
+    struct node *temp = node_ptr->next;
+    node_ptr->key = temp->key;
+    node_ptr->next = temp->next;
+    free(temp);
+}
 
 int main(int argc, char **argv)
 {
@@ -54,8 +76,15 @@ int main(int argc, char **argv)
     push(&head_ref, 2);
     push(&head_ref, 3);
     push(&head_ref, 4);
-    print_list(head_ref);
-    printf("%dth is %d\n", 3, GetNth(head_ref, 3));
+    push(&head_ref, 5);
+    push(&head_ref, 6);
+    push(&head_ref, 7);
+    printList(head_ref);
+    
+    struct node *temp = returnNth(head_ref, 3);
+    printList(temp);
+    deleteNode(temp);
+    printList(head_ref);
     exit(0);
 }
 

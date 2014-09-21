@@ -7,7 +7,9 @@ struct node{
 };
 
 void push(struct node **, int);
-void print_list(struct node *);
+void printList(struct node *);
 int  GetNth(struct node *, int);
+struct node *returnNth(struct node *, int);
+void deleteNode(struct node *);
 
 #endif
