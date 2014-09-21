@@ -44,20 +44,19 @@ int GetNth(struct node *head, int index)
     return current->key;
 }
 
-struct node *returnNth(struct node *head, int index)
+void returnNth(struct node *head, int index, struct node **ret)
 {
     if (!head)
-        return NULL;
+        return;
     int count = 0;
     struct node *current = head;
     while(current){
         if (count == index){
-            return current;
+            *ret = current;
         }
         count++;
         current = current->next;
     }
-    exit(0);
 }
 
 void deleteNode(struct node *node_ptr)
@@ -86,10 +85,48 @@ void reverse(struct node **head_ref)
     *head_ref = prev;
 }
 
+void recursiveReverse(struct node **head_ref)
+{
+    struct node *first = *head_ref;
+
+    if (first == NULL)
+        return;
+    struct node *rest = first->next;
+    if (rest == NULL)
+        return;
+
+    recursiveReverse(&rest);
+    first->next->next = first;
+    first->next = NULL;
+
+    *head_ref = rest;
+}
+
+/* return 0 on seccuss,other on error */
+int detectLoop(struct node *head, struct node **res)
+{
+    struct node *fast = head;
+    struct node *slow = head;
+
+    if (head == NULL)
+        return -1;
+    while (fast && fast->next){
+        fast = fast->next->next;
+        slow = slow->next;
+        if (fast == slow){
+            *res = fast;
+            return 0;
+        }
+    }
+    return -2;
+}
+
 
 int main(int argc, char **argv)
 {
     struct node *head_ref =NULL;
+    struct node *ret = NULL;
+    struct node *retNth = NULL;
 
     push(&head_ref, 1);
     push(&head_ref, 2);
@@ -100,14 +137,18 @@ int main(int argc, char **argv)
     push(&head_ref, 7);
     printList(head_ref);
     
-    struct node *temp = returnNth(head_ref, 3);
-    printList(temp);
-    deleteNode(temp); 
+    returnNth(head_ref, 3, &retNth);
+    printf("3th %d\n", retNth->key);
+    deleteNode(retNth); 
     printList(head_ref);
     reverse(&head_ref);
     printList(head_ref);
+    recursiveReverse(&head_ref);
+    printList(head_ref);
+    head_ref->next->next->next->next = head_ref;
+    int loop = detectLoop(head_ref,&ret);
+    printf("loop %d, loop->key %d\n",loop,ret->key);
+
     exit(0);
 }
-
-
 
