@@ -68,6 +68,25 @@ void deleteNode(struct node *node_ptr)
     free(temp);
 }
 
+void reverse(struct node **head_ref)
+{
+    if (*head_ref == NULL)
+        return;
+
+    struct node *current = *head_ref;
+    struct node *prev = NULL;
+    struct node *next;
+
+    while (current){
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    *head_ref = prev;
+}
+
+
 int main(int argc, char **argv)
 {
     struct node *head_ref =NULL;
@@ -83,7 +102,9 @@ int main(int argc, char **argv)
     
     struct node *temp = returnNth(head_ref, 3);
     printList(temp);
-    deleteNode(temp);
+    deleteNode(temp); 
+    printList(head_ref);
+    reverse(&head_ref);
     printList(head_ref);
     exit(0);
 }

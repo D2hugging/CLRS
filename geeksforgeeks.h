@@ -11,5 +11,8 @@ void printList(struct node *);
 int  GetNth(struct node *, int);
 struct node *returnNth(struct node *, int);
 void deleteNode(struct node *);
+void reverse(struct node **);
+
+
 
 #endif
