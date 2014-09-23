@@ -13,7 +13,10 @@ void returnNth(struct node *, int, struct node **);
 void deleteNode(struct node *);
 void reverse(struct node **);
 void recursiveReverse(struct node **);
-int detectLoop(struct node *, struct node **);
-
+int  detectLoop(struct node *, struct node **);
+void pairWiseSwap(struct node *);
+void swap(int *, int *);
+void swapNode(struct node *, struct node *);
+void deleteAlt(struct node *);
 
 #endif

@@ -121,33 +121,56 @@ int detectLoop(struct node *head, struct node **res)
     return -2;
 }
 
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void swapNode(struct node  *prev, struct node *current)
+{
+    prev->next = current->next;
+    current->next = prev;
+}
+
+void pairWiseSwap(struct node *head)
+{
+    struct node *current = head;
+    struct node *next_next;
+    
+    while (current && current->next){
+        next_next = current->next->next;
+        swapNode(current, current->next);
+        current = next_next;
+    }
+}
+
+void deleteAlt(struct node *head)
+{
+    struct node *current = head;
+    struct node *prev = head;
+    while ( prev && prev->next){
+        current = prev->next;
+        prev->next = current->next;
+        free(current);
+        prev = prev->next;
+    }
+}
 
 int main(int argc, char **argv)
 {
     struct node *head_ref =NULL;
-    struct node *ret = NULL;
-    struct node *retNth = NULL;
 
     push(&head_ref, 1);
     push(&head_ref, 2);
     push(&head_ref, 3);
     push(&head_ref, 4);
     push(&head_ref, 5);
-    push(&head_ref, 6);
-    push(&head_ref, 7);
     printList(head_ref);
     
-    returnNth(head_ref, 3, &retNth);
-    printf("3th %d\n", retNth->key);
-    deleteNode(retNth); 
+    pairWiseSwap(head_ref);
     printList(head_ref);
-    reverse(&head_ref);
-    printList(head_ref);
-    recursiveReverse(&head_ref);
-    printList(head_ref);
-    head_ref->next->next->next->next = head_ref;
-    int loop = detectLoop(head_ref,&ret);
-    printf("loop %d, loop->key %d\n",loop,ret->key);
 
     exit(0);
 }
