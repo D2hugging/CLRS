@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-
 #include "geeksforgeeks.h"
 
 void push(struct node **head_ref, int new_data)
@@ -66,6 +65,7 @@ void deleteNode(struct node *node_ptr)
     node_ptr->next = temp->next;
     free(temp);
 }
+
 
 void reverse(struct node **head_ref)
 {
