@@ -18,5 +18,6 @@ void pairWiseSwap(struct node *);
 void swap(int *, int *);
 void swapNode(struct node *, struct node *);
 void deleteAlt(struct node *);
+void rotate(struct node **, int);
 
 #endif

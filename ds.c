@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+
 #include "geeksforgeeks.h"
 
 void push(struct node **head_ref, int new_data)
@@ -65,7 +66,6 @@ void deleteNode(struct node *node_ptr)
     node_ptr->next = temp->next;
     free(temp);
 }
-
 
 void reverse(struct node **head_ref)
 {
@@ -158,6 +158,28 @@ void deleteAlt(struct node *head)
     }
 }
 
+void rotate(struct node **head_ref, int k)
+{
+    struct node *current = *head_ref;
+
+    int count = 1;
+    if (k == 0)
+        return;
+    if (count < k && current){
+        current = current->next;
+        count++;
+    }
+    if (!current)
+        return;
+    struct node *kthNode = current;
+    while (current->next){
+        current = current->next;
+    }
+    current->next = *head_ref;
+    *head_ref = kthNode->next;
+    kthNode->next = NULL;
+}
+
 int main(int argc, char **argv)
 {
     struct node *head_ref =NULL;
@@ -169,7 +191,8 @@ int main(int argc, char **argv)
     push(&head_ref, 5);
     printList(head_ref);
     
-    pairWiseSwap(head_ref);
+    // pairWiseSwap(head_ref);
+    rotate(&head_ref, 3);
     printList(head_ref);
 
     exit(0);
