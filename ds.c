@@ -180,6 +180,46 @@ void rotate(struct node **head_ref, int k)
     kthNode->next = NULL;
 }
 
+struct tnode *newNode(int data)
+{
+    struct tnode *node = (struct tnode *)malloc(sizeof(struct tnode));
+    if (!node)
+        return NULL;
+    node->key = data;
+    node->left = node->right = NULL;
+    return node;
+}
+
+/* root - left subtree - right subtree */
+void preorder(struct tnode *root)
+{
+    if (!root)
+        return;
+    printf("%d ", root->key);
+    preorder(root->left);
+    preorder(root->right);
+}
+
+/* left subtree - root - right subtree */
+void inorder(struct tnode *root)
+{
+    if (!root)
+        return;
+    inorder(root->left);
+    printf("%d ",root->key);
+    inorder(root->right);
+}
+
+/* left subtree - right subtree - root */
+void postorder(struct tnode *root)
+{
+     if (!root)
+        return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ",root->key);
+}
+
 int main(int argc, char **argv)
 {
     struct node *head_ref =NULL;
@@ -194,7 +234,17 @@ int main(int argc, char **argv)
     // pairWiseSwap(head_ref);
     rotate(&head_ref, 3);
     printList(head_ref);
-
+    struct tnode *root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+    root->right->left = newNode(6);
+    preorder(root);
+    printf("\n");
+    inorder(root);
+    printf("\n");
+    postorder(root);
     exit(0);
 }
 
