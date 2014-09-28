@@ -180,9 +180,9 @@ void rotate(struct node **head_ref, int k)
     kthNode->next = NULL;
 }
 
-struct tnode *newNode(int data)
+struct bstNode *newNode(int data)
 {
-    struct tnode *node = (struct tnode *)malloc(sizeof(struct tnode));
+    struct bstNode *node = (struct bstNode *)malloc(sizeof(struct bstNode));
     if (!node)
         return NULL;
     node->key = data;
@@ -191,7 +191,7 @@ struct tnode *newNode(int data)
 }
 
 /* root - left subtree - right subtree */
-void preorder(struct tnode *root)
+void preorder(struct bstNode *root)
 {
     if (!root)
         return;
@@ -201,7 +201,7 @@ void preorder(struct tnode *root)
 }
 
 /* left subtree - root - right subtree */
-void inorder(struct tnode *root)
+void inorder(struct bstNode *root)
 {
     if (!root)
         return;
@@ -211,7 +211,7 @@ void inorder(struct tnode *root)
 }
 
 /* left subtree - right subtree - root */
-void postorder(struct tnode *root)
+void postorder(struct bstNode *root)
 {
      if (!root)
         return;
@@ -220,9 +220,45 @@ void postorder(struct tnode *root)
     printf("%d ",root->key);
 }
 
+struct threadNode *leftmost(struct threadNode *root)
+{
+    if (root == NULL)
+        return NULL;
+    while (root->left){
+        root = root->left;
+    }
+    return root;
+}
+
+void threadInorder(struct threadNode *root)
+{
+    // if (!root)
+    //     return;
+    struct threadNode *current = leftmost(root);
+    while (current){
+        printf("%d ", current->key);
+        if (current->rightThread)
+            current = current->right;
+        else
+            current = leftmost(current->right);
+    }
+
+    
+}
+
+struct threadNode *newThreadNode(int data)
+{
+    struct threadNode *node = (struct threadNode *)malloc(sizeof(struct threadNode));
+    if (!node)
+        return NULL;
+    node->key = data;
+    node->left = node->right = NULL;
+    return node;
+}
+
 int main(int argc, char **argv)
 {
-    struct node *head_ref =NULL;
+ /*   struct node *head_ref =NULL;
 
     push(&head_ref, 1);
     push(&head_ref, 2);
@@ -230,21 +266,14 @@ int main(int argc, char **argv)
     push(&head_ref, 4);
     push(&head_ref, 5);
     printList(head_ref);
-    
-    // pairWiseSwap(head_ref);
-    rotate(&head_ref, 3);
-    printList(head_ref);
-    struct tnode *root = newNode(1);
-    root->left = newNode(2);
-    root->right = newNode(3);
-    root->left->left = newNode(4);
-    root->left->right = newNode(5);
-    root->right->left = newNode(6);
-    preorder(root);
-    printf("\n");
-    inorder(root);
-    printf("\n");
-    postorder(root);
+ */   
+    struct threadNode *root = newThreadNode(1);
+    root->left = newThreadNode(2);
+    root->right = newThreadNode(3);
+    root->left->left = newThreadNode(4);
+    root->left->right = newThreadNode(5);
+    root->right->left = newThreadNode(6);
+    threadInorder(root);
     exit(0);
 }
 
