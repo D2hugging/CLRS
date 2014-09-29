@@ -7,11 +7,11 @@ struct node
     struct node *next;
 };
 
-struct bstNode
+struct binNode
 {
 	int key;
-	struct bstNode *left;
-	struct bstNode *right;
+	struct binNode *left;
+	struct binNode *right;
 };
 
 struct threadNode
@@ -38,11 +38,12 @@ void deleteAlt(struct node *);
 void rotate(struct node **, int);
 
 /* tree */
-struct bstNode *newNode(int );
-void preorder(struct bstNode *);
-void inorder(struct bstNode *);
-void postorder(struct bstNode *);
+struct binNode *newNode(int );
+void preorder(struct binNode *);
+void inorder(struct binNode *);
+void postorder(struct binNode *);
 struct threadNode *leftmost(struct threadNode *);
 void threadInorder(struct threadNode *);
+int sizeTree(struct binNode *);
 
 #endif

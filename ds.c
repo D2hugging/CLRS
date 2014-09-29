@@ -180,9 +180,9 @@ void rotate(struct node **head_ref, int k)
     kthNode->next = NULL;
 }
 
-struct bstNode *newNode(int data)
+struct binNode *newNode(int data)
 {
-    struct bstNode *node = (struct bstNode *)malloc(sizeof(struct bstNode));
+    struct binNode *node = (struct binNode *)malloc(sizeof(struct binNode));
     if (!node)
         return NULL;
     node->key = data;
@@ -191,7 +191,7 @@ struct bstNode *newNode(int data)
 }
 
 /* root - left subtree - right subtree */
-void preorder(struct bstNode *root)
+void preorder(struct binNode *root)
 {
     if (!root)
         return;
@@ -201,7 +201,7 @@ void preorder(struct bstNode *root)
 }
 
 /* left subtree - root - right subtree */
-void inorder(struct bstNode *root)
+void inorder(struct binNode *root)
 {
     if (!root)
         return;
@@ -211,7 +211,7 @@ void inorder(struct bstNode *root)
 }
 
 /* left subtree - right subtree - root */
-void postorder(struct bstNode *root)
+void postorder(struct binNode *root)
 {
      if (!root)
         return;
@@ -256,6 +256,13 @@ struct threadNode *newThreadNode(int data)
     return node;
 }
 
+int sizeTree(struct binNode *root)
+{
+    if (!root)
+        return 0;
+    return sizeTree(root->left) + sizeTree(root->right) + 1;
+}
+
 int main(int argc, char **argv)
 {
  /*   struct node *head_ref =NULL;
@@ -267,13 +274,15 @@ int main(int argc, char **argv)
     push(&head_ref, 5);
     printList(head_ref);
  */   
-    struct threadNode *root = newThreadNode(1);
-    root->left = newThreadNode(2);
-    root->right = newThreadNode(3);
-    root->left->left = newThreadNode(4);
-    root->left->right = newThreadNode(5);
-    root->right->left = newThreadNode(6);
-    threadInorder(root);
+    struct binNode *root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+    // root->right->left = newNode(6);
+    
+    int size = sizeTree(root);
+    printf("%d\n", size);
     exit(0);
 }
 
