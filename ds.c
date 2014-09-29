@@ -263,6 +263,16 @@ int sizeTree(struct binNode *root)
     return sizeTree(root->left) + sizeTree(root->right) + 1;
 }
 
+int identicalTrees(struct binNode *a, struct binNode *b)
+{
+    if (!a && !b)
+        return 1;
+    if (a && b)
+        return (a->key == b->key) && identicalTrees(a->left,b->left) && identicalTrees(a->right,b->right);
+
+    return 0;
+}
+
 int main(int argc, char **argv)
 {
  /*   struct node *head_ref =NULL;
@@ -279,10 +289,16 @@ int main(int argc, char **argv)
     root->right = newNode(3);
     root->left->left = newNode(4);
     root->left->right = newNode(5);
-    // root->right->left = newNode(6);
-    
-    int size = sizeTree(root);
-    printf("%d\n", size);
+    root->right->left = newNode(6);
+ 
+    struct binNode *root1 = newNode(1);
+    root1->left = newNode(2);
+    root1->right = newNode(3);
+    root1->left->left = newNode(4);
+
+
+    int identical = identicalTrees(root, root1);
+    printf("%d\n", identical);
     exit(0);
 }
 

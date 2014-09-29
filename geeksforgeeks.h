@@ -45,5 +45,6 @@ void postorder(struct binNode *);
 struct threadNode *leftmost(struct threadNode *);
 void threadInorder(struct threadNode *);
 int sizeTree(struct binNode *);
+int identicalTrees(struct binNode *, struct binNode *);
 
 #endif
