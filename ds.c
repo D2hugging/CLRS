@@ -273,6 +273,35 @@ int identicalTrees(struct binNode *a, struct binNode *b)
     return 0;
 }
 
+int maxDepth(struct binNode *root)
+{
+    if (!root)
+        return 0;
+    else {
+        int lDepth = maxDepth(root->left);
+        int rDepth = maxDepth(root->right);
+
+        return (lDepth > rDepth ? (lDepth + 1) : (rDepth + 1 ));
+    }
+}
+
+void __deleteTree(struct binNode *root)
+{
+    if (!root)
+        return;
+    __deleteTree(root->left);
+    __deleteTree(root->right);
+    printf("\nDeleting node: %d", root->key);
+    free(root);
+}
+
+void deleteTree(struct binNode **root_ref)
+{
+    __deleteTree(*root_ref);
+    *root_ref = NULL;
+}
+
+
 int main(int argc, char **argv)
 {
  /*   struct node *head_ref =NULL;
@@ -290,15 +319,12 @@ int main(int argc, char **argv)
     root->left->left = newNode(4);
     root->left->right = newNode(5);
     root->right->left = newNode(6);
- 
-    struct binNode *root1 = newNode(1);
-    root1->left = newNode(2);
-    root1->right = newNode(3);
-    root1->left->left = newNode(4);
 
+    printf("%d\n", maxDepth(root));
+    printf("%p %d\n",root,root->key);
+    deleteTree(&root);
 
-    int identical = identicalTrees(root, root1);
-    printf("%d\n", identical);
+    printf("\n%p\n",root);
     exit(0);
 }
 

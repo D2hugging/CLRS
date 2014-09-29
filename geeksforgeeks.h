@@ -46,5 +46,10 @@ struct threadNode *leftmost(struct threadNode *);
 void threadInorder(struct threadNode *);
 int sizeTree(struct binNode *);
 int identicalTrees(struct binNode *, struct binNode *);
+int maxDepth(struct binNode *);
+void deleteTree(struct binNode **);
+void __deleteTree(struct binNode *);
+
+
 
 #endif
