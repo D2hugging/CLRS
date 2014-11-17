@@ -49,7 +49,8 @@ int identicalTrees(struct binNode *, struct binNode *);
 int maxDepth(struct binNode *);
 void deleteTree(struct binNode **);
 void __deleteTree(struct binNode *);
-
+void mergeSort(int *, int, int);
+void merge(int *, int, int, int);
 
 
 #endif

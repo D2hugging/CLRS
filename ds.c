@@ -3,7 +3,7 @@
 #include <string.h>
 #include <assert.h>
 
-#include "geeksforgeeks.h"
+#include "common.h"
 
 void push(struct node **head_ref, int new_data)
 {
@@ -301,6 +301,59 @@ void deleteTree(struct binNode **root_ref)
     *root_ref = NULL;
 }
 
+void mergeSort(int arr[], int left, int right)
+{
+    if (left < right){
+        int mid = (left + right )/2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
+void merge(int arr[], int left, int mid, int right)
+{
+    int i,j;
+    int k = left;
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    int a1[n1];
+    int a2[n2];
+    for (int i = 0; i < n1; ++i)
+    {
+        a1[i] = arr[left + i];
+    }
+    for (int j = 0; j < n2; ++j)
+    {
+        a2[j] = arr[mid + 1 +j];
+    }
+    i = j = 0;
+    
+    while (i < n1 && j < n2){
+        if (a1[i] <= a2[j]){
+            arr[k] = a1[i];
+            k++;
+            i++;
+        } else {
+            arr[k] = a2[j];
+            k++;
+            j++;
+        }
+
+    }
+
+    while (i < n1){
+        arr[k] = a1[i];
+        k++;
+        i++;
+    }
+    while (j < n2){
+        arr[k] = a2[j];
+        k++;
+        j++;
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -313,18 +366,17 @@ int main(int argc, char **argv)
     push(&head_ref, 5);
     printList(head_ref);
  */   
-    struct binNode *root = newNode(1);
-    root->left = newNode(2);
-    root->right = newNode(3);
-    root->left->left = newNode(4);
-    root->left->right = newNode(5);
-    root->right->left = newNode(6);
-
-    printf("%d\n", maxDepth(root));
-    printf("%p %d\n",root,root->key);
-    deleteTree(&root);
-
-    printf("\n%p\n",root);
+    // struct binNode *root = newNode(1);
+    // root->left = newNode(2);
+    // root->right = newNode(3);
+    // root->left->left = newNode(4);
+    int arr[] = {4,3,7,11,1};
+    int len = sizeof(arr)/sizeof(arr[0]) -1;
+    mergeSort(arr, 0, len);
+    for (int i = 0; i < len; ++i)
+    {
+        printf("%d ", arr[i]);
+    }
     exit(0);
 }
 
