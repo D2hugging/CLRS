@@ -1,4 +1,4 @@
-GeeksforGeeks
+CLRS
 =============
 ##common data structures and  algorithms
 
