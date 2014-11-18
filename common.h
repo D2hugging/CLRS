@@ -22,6 +22,14 @@ struct threadNode
 	int rightThread;
 };
 
+struct MaxHeap
+{
+	int size;
+	int *array;
+};
+
+void printArray(int *, int);
+
 /* list */
 void push(struct node **, int);
 void printList(struct node *);
@@ -51,6 +59,14 @@ void deleteTree(struct binNode **);
 void __deleteTree(struct binNode *);
 void mergeSort(int *, int, int);
 void merge(int *, int, int, int);
+
+/* sort */
+#define Left(x) 	((x << 1) + 1)
+#define Right(x) 	((x + 1) << 1)
+int heapSort(int *, int);
+struct MaxHeap *buildMaxHeap(int *, int);
+int maxHeapify(struct MaxHeap *, int);
+
 
 
 #endif

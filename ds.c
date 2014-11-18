@@ -304,7 +304,7 @@ void deleteTree(struct binNode **root_ref)
 void mergeSort(int arr[], int left, int right)
 {
     if (left < right){
-        int mid = (left + right )/2;
+        int mid = (left + right)/2;
         mergeSort(arr, left, mid);
         mergeSort(arr, mid + 1, right);
         merge(arr, left, mid, right);
@@ -355,6 +355,59 @@ void merge(int arr[], int left, int mid, int right)
     }
 }
 
+struct MaxHeap *buildMaxHeap(int arr[], int size)
+{
+    struct MaxHeap *maxheap = (struct MaxHeap *)malloc(sizeof(struct MaxHeap));
+    if (!maxheap)
+        return NULL;
+    maxheap->size = size;
+    maxheap->array = arr;
+
+    for (int i = 0; i < maxheap->size; ++i){
+        maxHeapify(maxheap, i);
+    }
+    return maxheap;
+}
+
+int maxHeapify(struct MaxHeap *maxheap, int index)
+{
+    if (!maxheap)
+        return -1;
+    int largest = index;
+    int left = Left(index);
+    int right = Right(index);
+    if ((left < maxheap->size) && (maxheap->array[left] > maxheap->array[largest])){
+        largest = left;
+    }
+    if ((right < maxheap->size) && (maxheap->array[right] > maxheap->array[largest])){
+        largest = right;
+    }
+    if (largest != index){
+        swap(&maxheap->array[largest], &maxheap->array[index]);
+        maxHeapify(maxheap, largest);
+    }
+    return 0;
+}
+
+int heapSort(int arr[], int size)
+{
+    struct MaxHeap *maxheap = buildMaxHeap(arr, size);
+    if (!maxheap)
+        return -1;
+    for (int i = (maxheap->size - 2)/2; i >= 0; --i){
+        swap(&maxheap->array[0], &maxheap->array[i]);
+        maxHeapify(maxheap, 0);
+    }
+    return 0;
+}
+
+void printArray(int *arr, int size)
+{
+    for (int i = 0; i < size; ++i)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
 int main(int argc, char **argv)
 {
  /*   struct node *head_ref =NULL;
@@ -370,13 +423,10 @@ int main(int argc, char **argv)
     // root->left = newNode(2);
     // root->right = newNode(3);
     // root->left->left = newNode(4);
-    int arr[] = {4,3,7,11,1};
-    int len = sizeof(arr)/sizeof(arr[0]) -1;
-    mergeSort(arr, 0, len);
-    for (int i = 0; i < len; ++i)
-    {
-        printf("%d ", arr[i]);
-    }
+    int arr[] = {4,13,19, 1,5, 9};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    heapSort(arr, size);
+    printArray(arr, size);
     exit(0);
 }
 
