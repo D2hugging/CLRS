@@ -2,7 +2,7 @@
 
 all : test
 
-test : ds.c
+test : common.c list.c sort.c tree.c bit.c
 	gcc -g -Wall -std=c99 -o $@ $^
 
 clean :
