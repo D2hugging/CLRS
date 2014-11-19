@@ -61,12 +61,11 @@ void mergeSort(int *, int, int);
 void merge(int *, int, int, int);
 
 /* sort */
-#define Left(x) 	((x << 1) + 1)
-#define Right(x) 	((x + 1) << 1)
 int heapSort(int *, int);
 struct MaxHeap *buildMaxHeap(int *, int);
 int maxHeapify(struct MaxHeap *, int);
 
-
+/* bit algorithms */
+int getSingle(int *, int);
 
 #endif

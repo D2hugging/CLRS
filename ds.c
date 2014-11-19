@@ -374,8 +374,8 @@ int maxHeapify(struct MaxHeap *maxheap, int index)
     if (!maxheap)
         return -1;
     int largest = index;
-    int left = Left(index);
-    int right = Right(index);
+    int left = (index << 1) + 1;
+    int right = (index + 1) << 1;
     if ((left < maxheap->size) && (maxheap->array[left] > maxheap->array[largest])){
         largest = left;
     }
