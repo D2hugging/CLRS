@@ -363,7 +363,7 @@ struct MaxHeap *buildMaxHeap(int arr[], int size)
     maxheap->size = size;
     maxheap->array = arr;
 
-    for (int i = 0; i < maxheap->size; ++i){
+    for (int i = (maxheap->size - 2)/2; i >= 0; --i){
         maxHeapify(maxheap, i);
     }
     return maxheap;
@@ -394,9 +394,12 @@ int heapSort(int arr[], int size)
     struct MaxHeap *maxheap = buildMaxHeap(arr, size);
     if (!maxheap)
         return -1;
-    for (int i = (maxheap->size - 2)/2; i >= 0; --i){
-        swap(&maxheap->array[0], &maxheap->array[i]);
-        maxHeapify(maxheap, 0);
+    printArray(maxheap->array, maxheap->size);
+    while(maxheap->size > 1){
+        /* swap the root and the last,then reduce the size by one*/
+        swap(&maxheap->array[0], &maxheap->array[--maxheap->size]);
+        /* maxHeapify the new size heap */
+        maxHeapify(maxheap, 0);        
     }
     return 0;
 }
@@ -423,7 +426,7 @@ int main(int argc, char **argv)
     // root->left = newNode(2);
     // root->right = newNode(3);
     // root->left->left = newNode(4);
-    int arr[] = {4,13,19, 1,5, 9};
+    int arr[] = {4,13,19, 1,5, 9,25,18};
     int size = sizeof(arr)/sizeof(arr[0]);
     heapSort(arr, size);
     printArray(arr, size);
