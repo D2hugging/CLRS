@@ -106,3 +106,20 @@ int heapSort(int arr[], int size)
     }
     return 0;
 }
+
+void insertSort(int *arr, int size)
+{
+    int i,key;
+    int j = 1;
+
+    while(j < size){
+        key = arr[j];
+        i = j - 1;
+        while ((i >= 0) && (arr[i] < key)){
+            arr[i+1] = arr[i];
+            --i;
+        }
+        arr[i+1] = key;
+        j++;
+    }
+}

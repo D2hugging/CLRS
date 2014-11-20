@@ -64,7 +64,7 @@ void merge(int *, int, int, int);
 int heapSort(int *, int);
 struct MaxHeap *buildMaxHeap(int *, int);
 int maxHeapify(struct MaxHeap *, int);
-
+void insertSort(int *, int);
 /* bit algorithms */
 int getSingle(int *, int);
 

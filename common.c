@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     // root->left->left = newNode(4);
     int arr[] = {4,13,19, 1,5, 9,25,18};
     int size = sizeof(arr)/sizeof(arr[0]);
-    heapSort(arr, size);
+    insertSort(arr, size);
     printArray(arr, size);
     exit(0);
 }
