@@ -4,7 +4,6 @@
 #include <assert.h>
 #include "common.h"
 
-
 struct binNode *newNode(int data)
 {
     struct binNode *node = (struct binNode *)malloc(sizeof(struct binNode));

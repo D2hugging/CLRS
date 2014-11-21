@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-
 #include "common.h"
-
-
-
 
 void printArray(int *arr, int size)
 {
@@ -32,8 +28,9 @@ int main(int argc, char **argv)
     // root->left->left = newNode(4);
     int arr[] = {4,13,19, 1,5, 9,25,18};
     int size = sizeof(arr)/sizeof(arr[0]);
-    insertSort(arr, size);
+    mergeSort(arr, 0,size);
     printArray(arr, size);
+    printf("%d\n", getSetBit(1024));
     exit(0);
 }
 

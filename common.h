@@ -9,23 +9,24 @@ struct node
 
 struct binNode
 {
-	int key;
-	struct binNode *left;
-	struct binNode *right;
+    int key;
+    struct binNode *left;
+    struct binNode *right;
 };
 
 struct threadNode
 {
-	int key;
-	struct threadNode *left;
-	struct threadNode *right;
-	int rightThread;
+    int key;
+    struct threadNode *left;
+    struct threadNode *right;
+    int rightThread;
 };
+
 
 struct MaxHeap
 {
-	int size;
-	int *array;
+    int size;
+    int *array;
 };
 
 void printArray(int *, int);
@@ -65,7 +66,11 @@ int heapSort(int *, int);
 struct MaxHeap *buildMaxHeap(int *, int);
 int maxHeapify(struct MaxHeap *, int);
 void insertSort(int *, int);
+
 /* bit algorithms */
 int getSingle(int *, int);
+int isPowerOf2(int);
+int getSetBit(int);
+
 
 #endif
