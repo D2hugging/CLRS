@@ -31,6 +31,7 @@ int main(int argc, char **argv)
     mergeSort(arr, 0,size);
     printArray(arr, size);
     printf("%d\n", getSetBit(1024));
+    printf("%d\n", swapNibbles(100));
     exit(0);
 }
 

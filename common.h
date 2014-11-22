@@ -1,5 +1,6 @@
 #ifndef __GEEKSFORGEEKS__
 #define __GEEKSFORGEEKS__
+#include <stdint.h>
 
 struct node
 {
@@ -28,6 +29,17 @@ struct MaxHeap
     int size;
     int *array;
 };
+
+/* priority queue */
+struct item {
+	int item;
+	int priority;
+};
+
+void insertPQ(struct item, int );
+struct item *getHighestPrio(void);
+void deleteHighestPrio();
+
 
 void printArray(int *, int);
 
@@ -71,6 +83,6 @@ void insertSort(int *, int);
 int getSingle(int *, int);
 int isPowerOf2(int);
 int getSetBit(int);
-
+uint8_t swapNibbles(uint8_t n);
 
 #endif

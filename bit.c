@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdint.h>
 #include "common.h"
 
 int isPowerOf2(int n)
@@ -23,4 +24,10 @@ int getSetBit(int n)
 		++count;
 	}
 	return count;
+}
+
+/* if n is 0b00100001,then 0010 and 0001 are two nibbles */
+uint8_t swapNibbles(uint8_t n)
+{
+	return ( (n & 0x0f) << 4 | (n &0xf0) >> 4);
 }
