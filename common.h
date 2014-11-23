@@ -2,6 +2,11 @@
 #define __GEEKSFORGEEKS__
 #include <stdint.h>
 
+
+#define bool 		_Bool
+#define true 		1
+#define false 		0
+
 struct node
 {
     int key;
@@ -84,5 +89,8 @@ int getSingle(int *, int);
 int isPowerOf2(int);
 int getSetBit(int);
 uint8_t swapNibbles(uint8_t n);
+int32_t turnOffK(int, int);
+bool isKBitSet(uint32_t, uint32_t);
+bool isPalindrome(uint32_t);
 
 #endif
