@@ -4,8 +4,6 @@
 #include <assert.h>
 #include "common.h"
 
-
-
 void mergeSort(int arr[], int left, int right)
 {
     if (left < right){

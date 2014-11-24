@@ -10,3 +10,13 @@ void printArray(int *arr, int size)
         printf("%d ", arr[i]);
     printf("\n");
 }
+
+void printList(struct node *head)
+{
+    struct node *current = head;
+    while(current){
+        printf("%d->",current->key);
+        current = current->next;
+    }
+    printf("NULL\n");
+}

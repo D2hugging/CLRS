@@ -15,7 +15,6 @@ void push(struct node **head_ref, int new_data)
     *head_ref = new_node;
 }
 
-
 int GetNth(struct node *head, int index)
 {
     struct node *current = head;
@@ -109,16 +108,6 @@ int detectLoop(struct node *head, struct node **res)
         }
     }
     return -2;
-}
-
-void printList(struct node *head)
-{
-    struct node *current = head;
-    while(current){
-        printf("%d->",current->key);
-        current = current->next;
-    }
-    printf("NULL\n");
 }
 
 void swap(int *a, int *b)
