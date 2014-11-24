@@ -60,3 +60,19 @@ bool isPalindrome(uint32_t n)
 	}
 	return true;
 }
+
+/* return the binary representation of n */
+void binIter(uint32_t n)
+{
+	for (uint32_t i = (1 << 31); i > 0; i=i/2)
+		(n & i) ? printf("1"):printf("0");
+	printf("\n");
+}
+
+void binRecu(int n)
+{
+	if (n > 1){
+		binRecu(n/2);
+	}
+	printf("%d", n%2);
+}

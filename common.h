@@ -92,5 +92,7 @@ uint8_t swapNibbles(uint8_t n);
 int32_t turnOffK(int, int);
 bool isKBitSet(uint32_t, uint32_t);
 bool isPalindrome(uint32_t);
+void binIter(uint32_t);
+void binRecu(int);
 
 #endif
