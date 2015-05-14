@@ -6,6 +6,29 @@
 #include "common.h"
 #include <sys/types.h>
 
+#define N                   10000
+#define BITPERWORD          32
+#define SHIFT               5
+#define MASK                0x1f
+
+int a[(N/BITPERWORD)+1];
+
+void set(int i)
+{
+    a[i>>SHIFT] |= (1<<(i & MASK));
+}
+
+void cli(int i)
+{
+    a[i>>SHIFT] &= (~(1<<(i & MASK)));
+}
+
+void test(int i)
+{
+    return a[i>>SHIFT] & (1<<(i & MASK));
+}
+
+
 int isPowerOf2(int n)
 {
 	/* if n is power of 2, it must be only one set bit in binary presation,
