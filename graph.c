@@ -115,9 +115,10 @@ void printGraph(struct Graph *graph)
 {
     for (int i = 0; i < graph->v; i++){
         fprintf(stderr, "Adjacency list of vertex %d\n head", i);
-        while(graph->array[i].head){
-            fprintf(stderr, "-> %d", graph->array[i].head->dest);
-            graph->array[i].head = graph->array[i].head->next;
+        struct adjListNode *pcur = graph->array[i].head;
+        while(pcur){
+            fprintf(stderr, "-> 0x%x", pcur->dest);
+            pcur = pcur->next;
         }
         fprintf(stderr, "\n");
     }
