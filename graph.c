@@ -143,8 +143,8 @@ void bfs(struct Graph *graph, int s)
             if (!visited[cur->dest]) {
                 visited[cur->dest] = G_TRUE;
                 enQueue(queue,cur->dest);
-                cur = cur->next;
             }
+            cur = cur->next;
         }
     }
     return;
