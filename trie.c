@@ -59,14 +59,14 @@ int search(struct trie *pTrie, char key[])
         
         p = p->children[index];
     }
-    return (!p && p->value);
+    return (p && p->value);
 }
 
 int main(int argc, char **argv)
 {
     struct trie Trie;
     char input[][8] = {"the","there","three","bye","eye","banana","bank","bad"};
-    char output[][32] = {"Not present in Trie","present in Trie"};
+    char output[][32] = {"Not present in Trie","Present in Trie"};
 
     newTrie(&Trie);
 
@@ -74,5 +74,6 @@ int main(int argc, char **argv)
         insert(&Trie, input[i]);
 
     fprintf(stderr, "%s-----%s\n","the",output[search(&Trie, "the")]);
+    fprintf(stderr, "%s-----%s\n","thr",output[search(&Trie, "thr")]);
     return 0;
 }
