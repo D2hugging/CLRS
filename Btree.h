@@ -13,4 +13,10 @@ struct BTreeNode {
 };
 
 struct BTreeNode *newBTreeNode(int t, int leaf);
+struct BTreeNode *search(struct BTreeNode *, int);
+void traverse(struct BTreeNode *);
+void insert(struct BTreeNode *, int);
+void insertNonFull(struct BTreeNode *, int);
+void splitChild(struct BTreeNode *, int);
+
 #endif
