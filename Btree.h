@@ -6,13 +6,18 @@
 
 struct BTreeNode {
     int     *keys;          /* array of keys */     
-    int     t;              /* Minumim degree */
     struct  BTreeNode **C; /* array of child pointer */
-    int     n;              /* current number of keys */
+    int     nr;              /* current number of keys */
     int     leaf;           /* leaf or not */
 };
 
-struct BTreeNode *newBTreeNode(int t, int leaf);
+struct BTree {
+    int t;                  /* minimum degree */
+    struct BTreeNode *root;
+};
+
+struct BTreeNode *newBTreeNode(void);
+struct BTree *newBTree(int t);
 struct BTreeNode *search(struct BTreeNode *, int);
 void traverse(struct BTreeNode *);
 void insert(struct BTreeNode *, int);
