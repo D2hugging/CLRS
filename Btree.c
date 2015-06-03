@@ -10,7 +10,7 @@ struct BTreeNode *newBTreeNode(void)
         return NULL;
     }
 
-    newNode->keys = (int *)malloc(sizeof(int) *(2*3 -1));
+    newNode->keys = (int *)malloc(sizeof(int) *(2*DEGREE -1));
     if (!newNode->keys) {
         free(newNode);
         return NULL;
@@ -19,7 +19,7 @@ struct BTreeNode *newBTreeNode(void)
     newNode->nr = 0;
     newNode->leaf = true;
     
-    newNode->C = (struct BTreeNode **)malloc(sizeof(struct BTreeNode *));
+    newNode->C = (struct BTreeNode **)malloc(sizeof(struct BTreeNode *)*2*DEGREE);
     
     return newNode;
 }
@@ -45,7 +45,7 @@ struct BTreeNode *search(struct BTreeNode *x, int k)
 
     if (x->keys[i] == k)
         return x->C[i];
-    if (x->leaf == true)
+    if (x->leaf)
         return NULL;
     return search(x->C[i], k);
 }
@@ -67,16 +67,15 @@ void traverse(struct BTreeNode *x)
 
 void insert(struct BTreeNode *x, int k)
 {
-        if (x->nr == 2 * 3 - 1) {
+        if (x->nr == 2 * DEGREE - 1) {
             struct BTreeNode *s = newBTreeNode();
-            x = s;
             s->leaf = false;
             s->nr = 0;
             s->C[0] = x;
+            x = s;
 
             splitChild(s, 0);
             insertNonFull(s, k);
-            x = s;
         } else {
             insertNonFull(x, k);
         }
@@ -97,7 +96,7 @@ void insertNonFull(struct BTreeNode *x, int k)
         while (i >= 0 && x->keys[i] > k)
             i--;
         i++;
-        if (x->C[i]->nr == 2 * 3 -1) {
+        if (x->C[i]->nr == 2 * DEGREE -1) {
             splitChild(x, i);
 
             if (x->keys[i] < k)
@@ -112,26 +111,31 @@ void splitChild(struct BTreeNode *x, int i)
     struct BTreeNode *z = newBTreeNode();
     struct BTreeNode* y = x->C[i];
     z->leaf = y->leaf;
-    z->nr = 3-1;
+    z->nr = DEGREE-1;
 
-    for (int j = 0; j < 3 -1; j++)
-        z->keys[j] = y->keys[j + 3];
+    /* 修改被提升节点右边部分的keys，C */
+    for (int j = 0; j < DEGREE -1; j++)
+        z->keys[j] = y->keys[j + DEGREE];
 
     if (!y->leaf) {
-        for (int j = 0; j < 3; j++) {
-            z->C[j] = y->C[j+3];
+        for (int j = 0; j < DEGREE; j++) {
+            z->C[j] = y->C[j+DEGREE];
         }
     }
-    y->nr = 3 - 1;
+    /* 修改被提升节点左边部分keys的个数 */
+    y->nr = DEGREE - 1;
 
-    for (int j = x->nr; j >= i + 1; j--)
+    /*  */
+    for (int j = x->nr + 1; j >= i + 1; j--)
         x->C[j+1] = x->C[j];
 
+    /* 被提升节点指向右边节点 */
     x->C[i+1] = z;
     for (int j = x->nr -1; j >=i;j--)
         x->keys[j+1] = x->keys[j];
     
-    x->keys[i] = y->keys[3 - 1];
+    /* 被提升节点keys赋值 */
+    x->keys[i] = y->keys[DEGREE - 1];
 
     x->nr++;
 }

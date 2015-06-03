@@ -3,6 +3,7 @@
 
 #define true  1
 #define false 0
+#define DEGREE 3
 
 struct BTreeNode {
     int     *keys;          /* array of keys */     
