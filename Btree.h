@@ -21,7 +21,7 @@ struct BTreeNode *newBTreeNode(void);
 struct BTree *newBTree(int t);
 struct BTreeNode *search(struct BTreeNode *, int);
 void traverse(struct BTreeNode *);
-void insert(struct BTreeNode *, int);
+void insert(struct BTree *, int);
 void insertNonFull(struct BTreeNode *, int);
 void splitChild(struct BTreeNode *, int);
 

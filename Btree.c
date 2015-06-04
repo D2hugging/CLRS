@@ -63,20 +63,38 @@ void traverse(struct BTreeNode *x)
         traverse(x->C[i]);
 
 }
-
+/*
 void insert(struct BTreeNode *x, int k)
 {
         if (x->nr == 2 * DEGREE - 1) {
             struct BTreeNode *s = newBTreeNode();
+            struct BTreeNode *temp = x;
+            x = s;
             s->leaf = false;
             s->nr = 0;
-            s->C[0] = x;
-            x = s;
+            s->C[0] = temp;
 
             splitChild(s, 0);
             insertNonFull(s, k);
         } else {
             insertNonFull(x, k);
+        }
+}
+*/
+void insert(struct BTree *T, int k)
+{
+    struct BTreeNode *r  = T->root;
+    if (r->nr == 2 * DEGREE - 1) {
+            struct BTreeNode *s = newBTreeNode();
+            T->root = s;
+            s->leaf = false;
+            s->nr = 0;
+            s->C[0] = r;
+  
+            splitChild(s, 0);
+            insertNonFull(s, k);
+        } else {
+            insertNonFull(r, k);
         }
 }
 
@@ -125,7 +143,7 @@ void splitChild(struct BTreeNode *x, int i)
     y->nr = DEGREE - 1;
 
     /*  */
-    for (int j = x->nr + 1; j >= i + 1; j--)
+    for (int j = x->nr; j >= i; j--)
         x->C[j+1] = x->C[j];
 
     /* 被提升节点指向右边节点 */
@@ -135,21 +153,24 @@ void splitChild(struct BTreeNode *x, int i)
     
     /* 被提升节点keys赋值 */
     x->keys[i] = y->keys[DEGREE - 1];
-
     x->nr++;
 }
 
 int main(void)
 {
     struct BTree *t = newBTree(3);
-    insert(t->root, 10);
-    insert(t->root, 20);
-    insert(t->root, 5);
-    insert(t->root, 6);
-    insert(t->root, 12);
-    insert(t->root, 30);
-    insert(t->root, 7);
-    insert(t->root, 17);
+    insert(t, 10);
+    insert(t, 20);
+    insert(t, 5);
+    insert(t, 6);
+    insert(t, 12);
+    insert(t, 30);
+    insert(t, 7);
+    insert(t, 17);
+    insert(t, 4);
+    insert(t, 3);
+    insert(t, 2);
+    insert(t, 15);
 
     traverse(t->root);
     int k = 6;
