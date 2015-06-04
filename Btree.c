@@ -44,7 +44,7 @@ struct BTreeNode *search(struct BTreeNode *x, int k)
         i++;
 
     if (x->keys[i] == k)
-        return x->C[i];
+        return x;
     if (x->leaf)
         return NULL;
     return search(x->C[i], k);
@@ -54,10 +54,9 @@ void traverse(struct BTreeNode *x)
 {
     int i = 0;
     for (i = 0; i < x->nr; i++) {
-        if (!x->leaf) {
+        if (!x->leaf) 
             traverse(x->C[i]);
-            fprintf(stderr, " %d", x->keys[i]);
-        }
+        fprintf(stderr, " %d", x->keys[i]);
     }
 
     if (!x->leaf)
