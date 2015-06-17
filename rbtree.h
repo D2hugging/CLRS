@@ -6,7 +6,7 @@
 
 struct rb_node {
     int color;
-    int key;
+    int data;
     struct rb_node *left;
     struct rb_node *right;
     struct rb_node *parent;
@@ -16,11 +16,10 @@ struct rb_tree {
     struct rb_node *root;
 };
 
-struct rb_node *new_rb_node(int key);
-struct rb_tree *new_rb_tree(void);
-void left_rotate(struct br_node **root, struct br_node *x);
-void right_rotate(struct br_node **root, struct br_node *x);
-void br_insert(struct rb_node **root, int key);
-void br_insert_fixup(struct rb_node **root, struct rb_node *z);
-
+void swap(int *, int *);
+void left_rotate(struct rb_node **root, struct rb_node *x);
+void right_rotate(struct rb_node **root, struct rb_node *x);
+void rb_insert(struct rb_node **root, int key);
+void rb_insert_fixup(struct rb_node **root, struct rb_node *z);
+void rb_inorder(struct rb_node *root);
 #endif
